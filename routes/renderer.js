@@ -12,8 +12,7 @@ router.get('/data', (req, res)=>{
       timestampsInSnapshots: true
     });
     var wholeData = []
-	// db.collection('ninjas').orderBy('name', 'asc').get()
-	db.collection('lin_esp8266').get()
+	db.collection('lin_esp8266').orderBy('waktu', 'asc').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
         // console.log(doc.id, '=>', doc.data());
@@ -26,6 +25,24 @@ router.get('/data', (req, res)=>{
     })
     .catch(error => {
       console.log('Error!', error);
+    })
+})
+
+router.post('/data', (req, res)=>{
+	const db = fire.firestore();
+	db.settings({
+      timestampsInSnapshots: true
+    });
+    db.collection('lin_esp8266').add({
+      nama: req.body.nama,
+	  usia: req.body.usia,
+	  waktu: new Date()
+    });
+    res.send({
+        nama: req.body.nama,
+		usia: req.body.usia,
+		waktu: new Date(),
+        status: 'POST data sukses!'
     })
 })
 
