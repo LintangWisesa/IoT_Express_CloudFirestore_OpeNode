@@ -42,8 +42,8 @@ router.post('/data', (req, res)=>{
       waktu: new Date()
     });
     res.send({
-      nama: req.body.nama,
-      usia: req.body.usia,
+      suhu: req.body.suhu,
+      lembab: req.body.lembab,
       analog: req.body.analog,
       waktu: new Date(),
       status: 'POST data sukses!'
