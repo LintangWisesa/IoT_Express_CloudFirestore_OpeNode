@@ -3,7 +3,9 @@ var router = express.Router();
 var fire = require('./fire')
 
 router.get('/', function (req, res) {
-	return res.send("<h1>Tes Express & Firebase Cloud Firestore</h1>");
+	return res.send(
+    "<h1>Tes Express & Firebase Cloud Firestore</h1><ul><li><p><b>GET /data</b></p></li><li><p><b>POST /data</b>  => {suhu, lembab, analog}</p></li></ul>"
+  );
 });
 
 router.get('/data', (req, res)=>{
@@ -34,15 +36,17 @@ router.post('/data', (req, res)=>{
       timestampsInSnapshots: true
     });
     db.collection('lin_esp8266').add({
-      nama: req.body.nama,
-	  usia: req.body.usia,
-	  waktu: new Date()
+      suhu: req.body.suhu,
+      lembab: req.body.lembab,
+      analog: req.body.analog,
+      waktu: new Date()
     });
     res.send({
-        nama: req.body.nama,
-		usia: req.body.usia,
-		waktu: new Date(),
-        status: 'POST data sukses!'
+      nama: req.body.nama,
+      usia: req.body.usia,
+      analog: req.body.analog,
+      waktu: new Date(),
+      status: 'POST data sukses!'
     })
 })
 
